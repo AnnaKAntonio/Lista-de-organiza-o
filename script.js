@@ -1,80 +1,33 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-    color: #333;
+// Selecionar os elementos da página
+const taskInput = document.getElementById('taskInput');
+const addTaskBtn = document.getElementById('addTaskBtn');
+const taskList = document.getElementById('taskList');
+
+// Adicionar evento ao botão de adicionar
+addTaskBtn.addEventListener('click', () => {
+  const taskText = taskInput.value.trim();
+
+  if (taskText === '') {
+    alert('Por favor, insira uma tarefa!');
+    return;
   }
-  
-  header {
-    background-color:darkblue;
-    color: white;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  main {
-    margin: 20px;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    color: black;
-  }
-  
-  .add-task {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  #taskInput {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  #addTaskBtn {
-    padding: 10px 20px;
-    background-color: darkblue;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  #addTaskBtn:hover {
-    background-color: darkblue;
-  }
-  
-  .task-list ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .task-list li {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    margin-bottom: 5px;
-    background-color: #f1f1f1;
-    border-radius: 4px;
-  }
-  
-  .task-list li button {
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    padding: 5px 10px;
-  }
-  
-  .task-list li button:hover {
-    background-color: green;
-  }
-  
+
+  // Criar um novo item na lista
+  const listItem = document.createElement('li');
+  listItem.innerHTML = `
+    ${taskText}
+    <button class="deleteBtn">Remover</button>
+  `;
+
+  // Adicionar a tarefa na lista
+  taskList.appendChild(listItem);
+
+  // Limpar o campo de entrada
+  taskInput.value = '';
+
+  // Adicionar funcionalidade de remover à tarefa
+  const deleteBtn = listItem.querySelector('.deleteBtn');
+  deleteBtn.addEventListener('click', () => {
+    listItem.remove();
+  });
+});
